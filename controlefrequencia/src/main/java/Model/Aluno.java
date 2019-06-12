@@ -1,8 +1,5 @@
 package Model;
 
-
-import javax.persistence.GeneratedValue;
-
 public class Aluno {
     private Long id;
     private String nome;
