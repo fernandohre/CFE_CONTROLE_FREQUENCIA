@@ -1,12 +1,22 @@
 package Model;
 
+import javax.persistence.*;
 import java.util.List;
 
-/**
- * Created by aluno on 29/05/19.
- */
+@Entity
 public class Turma {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    @Column(nullable = true)
     private String descricao;
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "turma_aluno",
+                joinColumns = @JoinColumn(name = "aluno_id",
+                                          referencedColumnName = "id"),
+                                          inverseJoinColumns = @JoinColumn(name = "turma_id",
+                                                                           referencedColumnName = "id"))
     private List<Aluno> alunos;
 
     public Turma(List<Aluno> lista) {
