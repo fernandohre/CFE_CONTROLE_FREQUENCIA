@@ -11,6 +11,7 @@ import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 
 @Configuration
 public class DataConfiguration {
+
     @Bean
     public DataSource dataSource(){
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
@@ -22,6 +23,16 @@ public class DataConfiguration {
     }
 
 
+    // Para teste local
+//     @Bean
+//     public DataSource dataSource() {
+//        DriverManagerDataSource dataSource = new DriverManagerDataSource();
+//        dataSource.setDriverClassName("com.mysql.jdbc.Driver");
+//        dataSource.setUrl("jdbc:mysql://localhost/CFE");
+//        dataSource.setUsername("artiumdominus");
+//        dataSource.setPassword("");
+//        return dataSource;
+//    }
 
     @Bean
     public JpaVendorAdapter jpaVendorAdapter(){

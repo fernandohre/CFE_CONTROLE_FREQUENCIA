@@ -16,6 +16,10 @@ public class Turma implements Serializable {
 
     private String disciplina;
 
+    private Integer ano;
+
+    private Integer semestre;
+
     public Long getId() {
         return id;
     }
@@ -30,5 +34,21 @@ public class Turma implements Serializable {
 
     public void setDisciplina(String disciplina) {
         this.disciplina = disciplina;
+    }
+
+    public Integer getAno() {
+        return ano;
+    }
+
+    public void setAno(Integer ano) {
+        this.ano = ano;
+    }
+
+    public Integer getSemestre() {
+        return semestre;
+    }
+
+    public void setSemestre(Integer semestre) {
+        this.semestre = semestre;
     }
 }
