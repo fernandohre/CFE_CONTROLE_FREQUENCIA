@@ -10,7 +10,7 @@ import javax.persistence.Id;
 public class Aluno {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
+    //id
     private Long id;
 
     private String nome;
