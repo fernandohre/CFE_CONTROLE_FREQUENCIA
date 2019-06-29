@@ -5,7 +5,8 @@ import br.ufg.inf.frequenciacontrole.repository.Aulas;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-@RestController("/aulas")
+@RestController
+@RequestMapping("/aulas")
 public class AulasController {
 
     @Autowired
