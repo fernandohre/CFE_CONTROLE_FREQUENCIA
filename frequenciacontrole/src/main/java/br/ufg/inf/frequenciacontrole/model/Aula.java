@@ -5,11 +5,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-import java.io.Serializable;
 import java.sql.Date;
 
 @Entity
-public class Aula implements Serializable {
+public class Aula {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
