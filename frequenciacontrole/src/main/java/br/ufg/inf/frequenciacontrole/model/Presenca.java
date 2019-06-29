@@ -1,21 +1,21 @@
 package br.ufg.inf.frequenciacontrole.model;
 
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+/*
+ Talvez seja melhor representar esta relação com referências diretas, mas por ora isto servirá
+ */
 @Entity
-public class Aluno {
+public class Presenca {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
     private Long id;
 
-    private String nome;
-
-    private String matricula;
+    private boolean presente;
 
     public Long getId() {
         return id;
@@ -25,19 +25,11 @@ public class Aluno {
         this.id = id;
     }
 
-    public String getNome() {
-        return nome;
+    public boolean getPresente() {
+        return presente;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public String getMatricula() {
-        return matricula;
-    }
-
-    public void setMatricula(String matricula) {
-        this.matricula = matricula;
+    public void setPresente(boolean presente) {
+        this.presente = presente;
     }
 }
