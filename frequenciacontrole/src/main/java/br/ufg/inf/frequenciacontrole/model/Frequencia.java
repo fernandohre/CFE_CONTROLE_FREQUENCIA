@@ -5,10 +5,6 @@ import javax.persistence.*;
 @Entity
 public class Frequencia {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
     @OneToOne
     private Turma turma;
 
@@ -16,14 +12,6 @@ public class Frequencia {
     private Aluno aluno;
 
     private boolean estaPresente;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public boolean getEstaPresente() {
         return estaPresente;
