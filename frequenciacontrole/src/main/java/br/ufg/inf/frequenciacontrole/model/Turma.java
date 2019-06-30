@@ -1,18 +1,28 @@
 package br.ufg.inf.frequenciacontrole.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 
-@Entity
+import java.util.List;
+
+
 public class Turma {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     private Long id;
 
-    private String disciplina;
+    private String descricao;
+
+    public Turma(Long id, String descricao) {
+        this.id = id;
+        this.descricao = descricao;
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String desc) {
+        this.descricao = desc;
+    }
 
     public Long getId() {
         return id;
@@ -22,11 +32,4 @@ public class Turma {
         this.id = id;
     }
 
-    public String getDisciplina() {
-        return disciplina;
-    }
-
-    public void setDisciplina(String disciplina) {
-        this.disciplina = disciplina;
-    }
 }

@@ -11,14 +11,8 @@ public class AlunoController {
     @Autowired
     private AlunoRepository repository;
 
-    @GetMapping(produces = "application/json")
-    public @ResponseBody Iterable<Aluno> obtenhaAlunos() {
-        Iterable<Aluno> listaAlunos = repository.findAll();
-        return listaAlunos;
-    }
-
     @PostMapping
-    public Aluno salveAluno(@RequestBody Aluno aluno) {
-        return repository.save(aluno);
+    public void cadastreAluno(@RequestBody Aluno aluno) {
+        repository.cadastreAluno(aluno);
     }
 }

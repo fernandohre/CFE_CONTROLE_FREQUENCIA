@@ -1,20 +1,10 @@
 package br.ufg.inf.frequenciacontrole.model;
 
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-
-@Entity
 public class Aluno {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    //id
     private Long id;
 
     private String nome;
-
     public Long getId() {
         return id;
     }
@@ -30,4 +20,10 @@ public class Aluno {
     public void setNome(String nome) {
         this.nome = nome;
     }
+
+    public Aluno(Long id, String nome) {
+        this.id = id;
+        this.nome = nome;
+    }
 }
+

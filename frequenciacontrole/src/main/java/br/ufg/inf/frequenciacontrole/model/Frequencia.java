@@ -1,39 +1,25 @@
 package br.ufg.inf.frequenciacontrole.model;
 
-import javax.persistence.*;
-
-@Entity
 public class Frequencia {
-
-    @OneToOne
-    private Turma turma;
-
-    @OneToOne
-    private Aluno aluno;
-
+    private Long aluno;
+    private Long turma;
     private boolean estaPresente;
 
-    public boolean getEstaPresente() {
-        return estaPresente;
-    }
-
-    public void getEstaPresente(boolean estaPresente) {
+    public Frequencia(Long aluno, Long turma, boolean estaPresente) {
+        this.aluno = aluno;
+        this.turma = turma;
         this.estaPresente = estaPresente;
     }
 
-    public Turma getTurma() {
+    public Long getIdTurma() {
         return turma;
     }
 
-    public void setTurma(Turma turma) {
-        this.turma = turma;
-    }
-
-    public Aluno getAluno() {
+    public Long getIdAluno() {
         return aluno;
     }
 
-    public void setAluno(Aluno aluno) {
-        this.aluno = aluno;
+    public boolean estaPresente() {
+        return estaPresente;
     }
 }
