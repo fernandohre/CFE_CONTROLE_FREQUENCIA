@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import './App.css';
 
+
+
+
 class App extends Component {
 
   constructor(props){
@@ -13,9 +16,21 @@ class App extends Component {
     }
   } 
 
-  componentDidMount(){
-    
+  buildList = (data) => {
+    console.log(data, null, '/t');
   }
+
+  componentDidMount(){
+    fetch('http://localhost:8080/alunos')
+      .then(res => res.json())
+      .then(json => {
+        this.setState({
+          datas: json
+        })
+      });
+  }
+
+  
 
   fSubmit = (e) =>{
     e.preventDefault();
@@ -34,7 +49,7 @@ class App extends Component {
       console.log("atualizando lista...");
       let index = this.state.index;
       debugger;
-      datas[index].nomeAluno = nomeAluno;
+      datas[index].nome = nomeAluno;
     }    
 
     this.setState({
@@ -58,7 +73,8 @@ class App extends Component {
 
   fEdit = (i) => {
     let data = this.state.datas[i];
-    this.refs.nomeAluno.value = data.nomeAluno;
+    debugger;
+    this.refs.nomeAluno.value = data.nome;
 
     this.setState({
       act: 1,
@@ -81,7 +97,7 @@ class App extends Component {
         <pre>
           {datas.map((data, i) =>
             <li key={i} className="myList">
-              {i+1}. {data.nomeAluno}
+              {i+1}. {data.nome}
               <button onClick={()=>this.fRemove(i)} className="myListButton">Remover </button>
               <button onClick={()=>this.fEdit(i)} className="myListButton">Editar </button>
             </li>
