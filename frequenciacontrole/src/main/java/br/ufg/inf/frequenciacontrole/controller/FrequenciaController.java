@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/frequencias")
+@CrossOrigin
 public class FrequenciaController {
     @Autowired
     private FrequenciaRepository repository;
