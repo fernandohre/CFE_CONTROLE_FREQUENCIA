@@ -14,7 +14,7 @@ class App extends Component {
   } 
 
   componentDidMount(){
-    this.refs.name.focus();
+    
   }
 
   fSubmit = (e) =>{
@@ -22,18 +22,19 @@ class App extends Component {
     console.log('try');
 
     let datas = this.state.datas;
-    let name = this.refs.name.value;
-    let address = this.refs.address.value;
+    let nomeAluno = this.refs.nomeAluno.value;
 
     if(this.state.act === 0){   //new
+      console.log("Adicionando primeiro...");
       let data = {
-        name, address
+        nomeAluno
       }
       datas.push(data);
     }else{                      //update
+      console.log("atualizando lista...");
       let index = this.state.index;
-      datas[index].name = name;
-      datas[index].address = address;
+      debugger;
+      datas[index].nomeAluno = nomeAluno;
     }    
 
     this.setState({
@@ -42,7 +43,6 @@ class App extends Component {
     });
 
     this.refs.myForm.reset();
-    this.refs.name.focus();
   }
 
   fRemove = (i) => {
@@ -58,15 +58,14 @@ class App extends Component {
 
   fEdit = (i) => {
     let data = this.state.datas[i];
-    this.refs.name.value = data.name;
-    this.refs.address.value = data.address;
+    this.refs.nomeAluno.value = data.nomeAluno;
 
     this.setState({
       act: 1,
       index: i
     });
 
-    this.refs.name.focus();
+    this.refs.nomeAluno.focus();
   }  
 
   render() {
@@ -75,16 +74,16 @@ class App extends Component {
       <div className="App">
         <h2>{this.state.title}</h2>
         <form ref="myForm" className="myForm">
-          <input type="text" ref="name" placeholder="Selecione a turma" className="formField" />
-          <input type="text" ref="address" placeholder="Nome do aluno" className="formField" />
-          <button onClick={(e)=>this.fSubmit(e)} className="myButton">submit </button>
+          {/*<input type="text" ref="name" placeholder="Selecione a turma" className="formField" />*/}
+          <input type="text" ref="nomeAluno" placeholder="Nome do aluno" className="formField" />
+          <button onClick={(e)=>this.fSubmit(e)} className="myButton">Salvar </button>
         </form>
         <pre>
           {datas.map((data, i) =>
             <li key={i} className="myList">
-              {i+1}. {data.name}, {data.address}
-              <button onClick={()=>this.fRemove(i)} className="myListButton">remove </button>
-              <button onClick={()=>this.fEdit(i)} className="myListButton">edit </button>
+              {i+1}. {data.nomeAluno}
+              <button onClick={()=>this.fRemove(i)} className="myListButton">Remover </button>
+              <button onClick={()=>this.fEdit(i)} className="myListButton">Editar </button>
             </li>
           )}
         </pre>
