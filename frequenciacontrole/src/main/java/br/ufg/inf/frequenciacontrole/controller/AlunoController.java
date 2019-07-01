@@ -15,8 +15,8 @@ public class AlunoController {
     private AlunoRepository repository;
 
     @PostMapping
-    public void cadastreAluno(@RequestBody Aluno aluno) {
-        repository.cadastreAluno(aluno);
+    public @ResponseBody Aluno cadastreAluno(@RequestBody Aluno aluno) {
+        return repository.cadastreAluno(aluno);
     }
 
     @GetMapping(produces = "application/json")

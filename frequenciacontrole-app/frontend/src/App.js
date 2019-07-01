@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import './App.css';
 
+import Select from 'react-select'
 
-
+const options = []
 
 class App extends Component {
 
@@ -12,15 +13,13 @@ class App extends Component {
       title: 'Controle de frequencia',
       act: 0,
       index: '',
-      datas: []
+      datas: [],
+      turmas: []
     }
-  } 
-
-  buildList = (data) => {
-    console.log(data, null, '/t');
   }
 
   componentDidMount(){
+    //Obtém alunos
     fetch('http://localhost:8080/alunos')
       .then(res => res.json())
       .then(json => {
@@ -28,23 +27,55 @@ class App extends Component {
           datas: json
         })
       });
-  }
 
-  
+    //Obtém turmas
+    fetch('http://localhost:8080/turmas')
+      .then(res => res.json())
+      .then(json => {
+        this.setState({
+          turmas: json
+        })
+        console.log("json: 0", json);
+
+        json.forEach((item) => {
+          console.log(item);
+          options.push({
+            value: item.id,
+            label: item.descricao
+          })
+        })
+      });
+    
+    
+  }
 
   fSubmit = (e) =>{
     e.preventDefault();
-    console.log('try');
 
     let datas = this.state.datas;
     let nomeAluno = this.refs.nomeAluno.value;
 
     if(this.state.act === 0){   //new
-      console.log("Adicionando primeiro...");
-      let data = {
-        nomeAluno
-      }
-      datas.push(data);
+      console.log("Adicionando na lista");
+
+      fetch('http://localhost:8080/alunos', 
+          { method: 'post', 
+            headers: {
+              'Content-Type':'application/json'
+            }, 
+            body:  {
+              "nome" : nomeAluno
+            }
+          })
+      .then(res => res.json())
+      .then(json => {
+        datas.push(json)
+      })
+      .catch((error) => {
+        console.log("Falha ao salvar: ", error);
+      })
+      
+      console.log(datas);
     }else{                      //update
       console.log("atualizando lista...");
       let index = this.state.index;
@@ -83,13 +114,14 @@ class App extends Component {
 
     this.refs.nomeAluno.focus();
   }  
-
+  
   render() {
     let datas = this.state.datas;
     return (
       <div className="App">
         <h2>{this.state.title}</h2>
         <form ref="myForm" className="myForm">
+          <Select options={options} placeholder="Selecione uma turma"/>
           {/*<input type="text" ref="name" placeholder="Selecione a turma" className="formField" />*/}
           <input type="text" ref="nomeAluno" placeholder="Nome do aluno" className="formField" />
           <button onClick={(e)=>this.fSubmit(e)} className="myButton">Salvar </button>

@@ -14,9 +14,13 @@ public class AlunoRepository {
     @Autowired
     private JdbcTemplate servico;
 
-    public void cadastreAluno(Aluno aluno) {
+    public Aluno cadastreAluno(Aluno aluno) {
+        String sqlUltimoId = "select id from aluno where id in (select max(id) from aluno)";
         String insert = "insert into aluno(nome) values('" + aluno.getNome() + "')";
         servico.execute(insert);
+        Long idAluno = (Long)servico.queryForObject(sqlUltimoId, Long.class);
+        aluno.setId(idAluno);
+        return aluno;
     }
 
     public List<Aluno> obtenhaAlunos() {
