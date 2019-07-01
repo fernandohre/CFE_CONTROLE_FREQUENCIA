@@ -54,6 +54,11 @@ class App extends Component {
 
     let datas = this.state.datas;
     let nomeAluno = this.refs.nomeAluno.value;
+    let index = this.state.index;
+
+    let req = {
+      nome: nomeAluno
+    }
 
     if(this.state.act === 0){   //new
       console.log("Adicionando na lista");
@@ -63,19 +68,19 @@ class App extends Component {
             headers: {
               'Content-Type':'application/json'
             }, 
-            body:  {
-              "nome" : nomeAluno
-            }
+            body: JSON.stringify(req)
           })
-      .then(res => res.json())
-      .then(json => {
-        datas.push(json)
+      .then(res => {
+        res.json()
       })
       .catch((error) => {
         console.log("Falha ao salvar: ", error);
       })
       
-      console.log(datas);
+      datas.push({
+        id: index + 1,
+        nome: nomeAluno
+      })
     }else{                      //update
       console.log("atualizando lista...");
       let index = this.state.index;
@@ -99,7 +104,7 @@ class App extends Component {
     });
 
     this.refs.myForm.reset();
-    this.refs.name.focus();
+    this.refs.nomeAluno.focus();
   }
 
   fEdit = (i) => {
@@ -113,7 +118,11 @@ class App extends Component {
     });
 
     this.refs.nomeAluno.focus();
-  }  
+  }
+  
+  fMarcarPresenca = (i) => {
+
+  }
   
   render() {
     let datas = this.state.datas;
@@ -132,6 +141,7 @@ class App extends Component {
               {i+1}. {data.nome}
               <button onClick={()=>this.fRemove(i)} className="myListButton">Remover </button>
               <button onClick={()=>this.fEdit(i)} className="myListButton">Editar </button>
+              <button onClick={()=>this.fMarcarPresenca(i)} className="myListButton">Marcar Presença</button>
             </li>
           )}
         </pre>
